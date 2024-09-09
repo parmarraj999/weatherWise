@@ -1,0 +1,112 @@
+.sidebar-container{
+    padding: 1.5rem;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 4.5fr 2.5fr 2fr 2fr;
+}
+.input-container{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px solid grey; */
+    border-radius: 2rem;
+}
+.input-container input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0 .5rem;
+    font-size: 20px;
+    color: black;
+    outline: none;
+}
+.close-btn{
+    min-width: 45px;
+    height: 45px;
+    background: rgba(0,0,0,.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.search-btn{
+    min-width: 45px;
+    height: 45px;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .2s all;
+}
+.search-btn:hover{
+    background: #fdc500;
+}
+
+/* ------- weather image container ----- */
+
+.weather-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.weather-container h2{
+    font-size: 5rem;
+    display: flex;
+    font-weight: 400;
+}
+.weather-container h2 span{
+    font-size: 28px;
+    padding-top: 15px;
+    font-weight: 600;
+}
+.weather-container h3{
+    font-size: 20px;
+}
+.weather-container h3 span{
+    color: rgba(0,0,0,.4);
+}
+
+/* ------------ cloud container -------  */
+
+.cloud-container{
+    width: 100%;
+    height: 100%;
+    border-top: 1px solid rgba(0,0,0,.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+.cloud-container h4{
+    font-size: 22px;
+}
+/* ------ city container ------  */
+
+.city-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.city-container .image-background{
+    width: 100%;
+    height: 90%;
+    background: red;
+    border-radius: 1.5rem;
+}
