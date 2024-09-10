@@ -109,4 +109,15 @@
     height: 90%;
     background: red;
     border-radius: 1.5rem;
+    background: url("https://i.pinimg.com/564x/5a/bb/2c/5abb2caa213b5a868c320fe0a356f704.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image-background h1{
+    font-size: 20px;
+    color: white;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
 }
