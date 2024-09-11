@@ -8,24 +8,25 @@ import { WeatherData } from './context/context';
 function App() {
 
   const [searchValue, setSearchValue] = useState<string>('');
-  const [data,setData] = useState<string[]>([])
-  // console.log(searchValue)
+  const [data,setData] = useState<any>([])
+  const [currentData,setCurrentData] = useState<any>([]);
+  const [forecastData,setForecastData] = useState<any>([]);
 
   const fetchData = () => {
     const response = axios.get(`https://api.weatherapi.com/v1/forecast.json?key=8eb31ccd94344ddaa6675422241009&q=${searchValue}&days=1&aqi=no&alerts=no`)
       .then(result => {
-        console.log(result)
+        console.log("data fetched")
+        setData(result.data)
+        setCurrentData(result.data.current)
+        setForecastData(result.data.forecast)
       })
       .catch(error => {
         console.log(error)
       })
   }
-  useEffect(() => {
-    // fetchData();
-  }, [])
 
   return (
-    <WeatherData.Provider value={{data ,setData}}>
+    <WeatherData.Provider value={{data ,setData, currentData, setCurrentData, forecastData, setForecastData}}>
       <div className="App">
         <div className='right-main'>
           <Sidebar setSearchValue={setSearchValue} fetchData={fetchData} />
