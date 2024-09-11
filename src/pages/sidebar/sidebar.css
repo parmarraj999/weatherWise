@@ -54,6 +54,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(#12100E,#2B4162);
+    border-radius: 1rem;
 }
 
 .weather-container{
@@ -74,7 +76,8 @@
     font-weight: 600;
 }
 .weather-container h3{
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 400;
 }
 .weather-container h3 span{
     color: rgba(0,0,0,.4);
@@ -92,7 +95,8 @@
     gap: 1rem;
 }
 .cloud-container h4{
-    font-size: 22px;
+    font-size: 20px;
+    font-weight: 500;
 }
 /* ------ city container ------  */
 

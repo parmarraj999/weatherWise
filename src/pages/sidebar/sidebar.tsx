@@ -5,13 +5,18 @@ import { WeatherData } from '../../context/context';
 interface SidebarProps {
     setSearchValue: (value: string) => void,
     fetchData: () => void,
-    img : string,
+    img: string,
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
 
+    const dayName = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday','Saturday','Sunday']
+    const day = new Date().getDay();
+    const hour = new Date().getHours();
+    const minute = new Date().getMinutes();
+
     const { setSearchValue, fetchData, img } = props;
-    const { data, setData, currentData} = useContext(WeatherData);
+    const { data, setData, currentData } = useContext(WeatherData);
 
     console.log(data)
 
@@ -21,65 +26,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
     const hanldeClose = () => {
         setSearchValue('');
-        setData([]);
+        setData(null);
     }
-
-    // const [code,setCode] = useState(1168)
-
-    // image codes 
-
-    // const sunny = [1000]
-
-    // const partlyCloud = [1003]
-
-    // const cloud = [1006]
-
-    // const rain = [1063, 1072, 1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189, 1192, 1195, 1198, 1201, 1240, 1243, 1246]
-
-    // const snow = [1066, 1114, 1117, 1210, 1213, 1216, 1219, 1237, 1237, 1255, 1261, 1264]
-
-    // const heavySnow = [1222, 1225, 1258, 1282]
-
-    // const heavySleet = [1207, 1252, 1069]
-
-    // const fog = [1135, 1147, 1030]
-
-    // const thunder = [1087, 1273, 1276, 1279]
-
-    // const sleet = [1249, 1204]
-
-    // const [img, setImg] = useState('sunny')
-
-
-    // if (sunny.includes(code)) {
-    //     setImg("sunny")
-    // }
-    // if (partlyCloud.includes(code)) {
-    //     setImg("partlyCloud")
-    // }
-    // if (cloud.includes(code)) {
-    //     setImg("cloud")
-    // }
-    // if (rain.includes(code)) {
-    //     setImg("rain")
-    // }
-    // if (snow.includes(code)) {
-    //     setImg("snow")
-    // }
-    // if (fog.includes(code)) {
-    //     setImg("fog")
-    // }
-    // if (thunder.includes(code)) {
-    //     setImg("thunder")
-    // }
-    // if (heavySnow.includes(code)) {
-    //     setImg("heavySnow")
-    // }
-    // if (heavySleet.includes(code)) {
-    //     setImg("heavySleet")
-    // }
-
-
 
 
     return (
@@ -98,11 +46,14 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             </div>
             <div className='weather-container' >
                 <h2>{currentData?.temp_c}<span>°C</span></h2>
-                <h3>Monday, <span>16:00</span></h3>
+                <h3>{dayName[day]}, <span>{hour}:{minute}</span></h3>
             </div>
             <div className='cloud-container' >
-                <h4>{currentData?.condition?.text}</h4>
-                <h4>Rain - 30%</h4>
+                <h4 style={{color:'grey'}} >{currentData?.condition?.text}</h4>
+                <div style={{display:"flex",alignItems:'center',gap:"1rem"}}>
+                    <img src='../../../image/overcast.png' style={{ width: "40px" }} />
+                    <h4>Rain - 30%</h4>
+                </div>
             </div>
             <div className='city-container' >
                 <div className='image-background' >

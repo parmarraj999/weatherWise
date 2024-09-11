@@ -11,7 +11,7 @@ function App() {
   const [data,setData] = useState<any>([])
   const [currentData,setCurrentData] = useState<any>([]);
   const [forecastData,setForecastData] = useState<any>([]);
-  const [img, setImg] = useState('sunny')
+  const [img, setImg] = useState('noImage')
 
   const sunny = [1000]
 
