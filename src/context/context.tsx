@@ -10,6 +10,11 @@ interface WeatherData{
     setForecastData : (value : any) => void;
 }
 
+interface CelciusUnit{
+    celcius: string,
+    setCelcius : (value : string) => void;
+}
+
 export const WeatherData = createContext<WeatherData>({
     data: [],
     currentData:[],
@@ -18,3 +23,8 @@ export const WeatherData = createContext<WeatherData>({
     setCurrentData: () => [],
     setForecastData: () => [],
 });
+
+export const CelciusUnit = createContext<CelciusUnit>({
+    celcius : "Celcius",
+    setCelcius: () => "",
+})
