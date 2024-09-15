@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './main.css'
 import Header from './header/header'
+import DayCard from './dayCard/dayCard'
 
 function Main() {
 
@@ -9,6 +10,7 @@ function Main() {
   return (
     <div className='main-container'>
       <Header mainNavigation={mainNavigation}/>
+      <DayCard/>
     </div>
   )
 }
