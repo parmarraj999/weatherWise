@@ -78,6 +78,8 @@ function App() {
       })
   }
 
+  console.log(data)
+
 const getPhotos = async (query: string, page: number, perPage : number) => {
   try {
     const response = await axios.get(`${unsplashBaseUrl}/search/photos`, {

@@ -1,15 +1,17 @@
 .daycard-container{
     max-width: 100%;
+    /* height: auto; */
     display: flex;
     gap: 1rem;
-    overflow-x: scroll;
+    overflow: scroll;
+    min-height: 150px;
 }
 .daycard-container::-webkit-scrollbar{
     display: none;
 }
 .daycard{
     min-width: 140px;
-    height: 140px;
+    min-height: 100%;
     background-color: white;
     border-radius: 15px;
     display: flex;

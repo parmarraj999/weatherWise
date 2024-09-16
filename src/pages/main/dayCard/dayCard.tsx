@@ -1,11 +1,15 @@
 import React, { useContext } from 'react'
 import './dayCard.css'
-import { WeatherData } from '../../../context/context'
+import { CelciusUnit, WeatherData } from '../../../context/context'
 
 function DayCard() {
 
     const { forecastData } = useContext(WeatherData)
     const data = forecastData.forecastday;
+
+    // celcius and farenheit data 
+
+    const { celcius } = useContext(CelciusUnit)
 
     // get image according to code
 
@@ -61,7 +65,6 @@ function DayCard() {
     }
     const getDay = (date: string) => {
         const day = findDayOfTheWeek(`${date}`)
-        console.log(day)
         return day;
     }
 
@@ -76,7 +79,13 @@ function DayCard() {
                             <h1>{getDay(data?.date)}</h1>
                             <div className='daycard-img' >{image(data?.day?.condition?.code)}</div>
                             <div>
-                                <h3>{data?.day?.avgtemp_c}°C</h3>
+                                {
+                                    celcius === "farenheit" ?
+                                    <h3>{data?.day?.avgtemp_f}°F</h3>
+                                    :
+                                    <h3>{data?.day?.avgtemp_c}°C</h3>
+                                }
+                                {/* <h3>{data?.day?.avgtemp_c}°C</h3> */}
                                 <h4></h4>
                             </div>
                         </div>

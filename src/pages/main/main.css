@@ -1,8 +1,24 @@
 .main-container{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     padding: 1.2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+.today-card-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    gap: .8rem;
+    /* border: 1px solid black; */
+}
+.today-card-wrapper::-webkit-scrollbar{
+    display: none;
+}
+.today-card-wrapper h3{
+    font-size: 20px;
+    font-weight: 500;
 }

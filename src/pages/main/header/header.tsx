@@ -49,8 +49,8 @@ const Header: React.FC<Props> = (props) => {
     return (
         <div className='main-header' >
             <div style={{ display: 'flex', gap: '1.5rem' }}>
-                <h2 style={mainNavigation === "today" ? { color: "black" } : {}} >Today</h2>
-                <h2 style={mainNavigation === "week" ? { color: "black", borderBottom: "2px solid black" } : {}} >Week</h2>
+                {/* <h2 style={mainNavigation === "today" ? { color: "black" } : {}} >Today</h2> */}
+                <h2>Week</h2>
             </div>
             <div style={{ display: 'flex', gap: '1rem' }} >
                 <div style={celcius === "celcius" ? { background: "black", color: 'white' } : {}} className='degree-btn' onClick={changeCelcius}>°C

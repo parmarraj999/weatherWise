@@ -65,7 +65,12 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             </div>
             <div className='cloud-container' >
                 <h4>{currentData?.condition?.text}</h4>
-                <div className='details-btn' >Analytics</div>
+                {
+                    celcius === "farenheit" ?
+                        <h4>Feels Like - <span style={{ color: "black", fontWeight: 600 }} >{currentData?.feelslike_f}°F</span></h4>
+                        :
+                        <h4>Feels Like - <span style={{ color: "black", fontWeight: 600 }} >{currentData?.feelslike_c}°C</span></h4>
+                }
             </div>
             <div className='city-container' >
                 <div className='image-background'>
