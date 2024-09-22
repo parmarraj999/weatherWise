@@ -33,6 +33,9 @@
     justify-content: center;
     cursor: pointer;
 }
+.close-sidebar{
+    display: none;
+}
 .search-btn{
     min-width: 45px;
     height: 45px;
@@ -156,4 +159,11 @@
     left: 50%;
     transform: translate(-50%,-50%);
     z-index: 1000;
+}
+
+
+@media screen and (max-width:765px) {
+    .close-sidebar{
+        display: flex;
+    }
 }

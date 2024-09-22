@@ -60,3 +60,12 @@
     border: 1px solid black;
     background: linear-gradient(red, #00c5fb);
 }
+
+@media screen and (max-width:765px) {
+    .todaycard-container{
+        justify-content:center;
+    }
+    .todayCard{
+        width: 45%;
+    }
+}

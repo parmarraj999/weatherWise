@@ -5,7 +5,6 @@ import { WeatherData } from '../../../context/context'
 function TodayCard() {
 
     const { currentData, forecastData } = useContext(WeatherData)
-    console.log(currentData)
 
     return (
         <div className='todaycard-container' >

@@ -11,8 +11,10 @@ interface WeatherData{
 }
 
 interface CelciusUnit{
+    sidebar: string,
     celcius: string,
     setCelcius : (value : string) => void;
+    setSidebar: (value : any) => void;
 }
 
 export const WeatherData = createContext<WeatherData>({
@@ -27,4 +29,6 @@ export const WeatherData = createContext<WeatherData>({
 export const CelciusUnit = createContext<CelciusUnit>({
     celcius : "Celcius",
     setCelcius: () => "",
+    sidebar: "flex",
+    setSidebar: () => {},
 })

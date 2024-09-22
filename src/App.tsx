@@ -10,12 +10,14 @@ function App() {
 
   const [searchValue, setSearchValue] = useState<string>('');
 
+  const [sidebar,setSidebar] = useState<string>("flex")
+
   const [data, setData] = useState<any>([])
   const [currentData, setCurrentData] = useState<any>([]);
   const [forecastData, setForecastData] = useState<any>([]);
-  
-  const [latitude,setLatitude] = useState<any | null>()
-  const [longitude,setLongitude] = useState<any | null>()
+
+  // const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+  const [position, setPosition] = useState<{ latitude: number; longitude: number } | null>();
 
   const [img, setImg] = useState('noImage')
   const [cityImg, setCityImg] = useState<string>('')
@@ -36,21 +38,66 @@ function App() {
   const unsplashApiKey = '1tUsYVORh4cahAsaRjqZp2STtiEyySjyFWkbAKt5uUY';
   const unsplashBaseUrl = 'https://api.unsplash.com/';
 
-  
-  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
-    useGeolocated({
-      positionOptions: {
-        enableHighAccuracy: false,
-      },
-      userDecisionTimeout: 5000,
-    })
+  useEffect(() => {
 
-    useEffect(()=>{
-      fetchData();
-    },[isGeolocationAvailable])
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setPosition({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    })
+  }, []);
+
+  useEffect(() => {
+    if (position) {
+      const response = axios.get(`https://api.weatherapi.com/v1/forecast.json?key=8eb31ccd94344ddaa6675422241009&q=${position.latitude},${position.longitude}&days=7&aqi=no&alerts=no`)
+        .then(result => {
+          console.log("data fetched")
+          setData(result.data)
+          setCurrentData(result.data.current)
+          setForecastData(result.data.forecast)
+
+          console.log(result.data)
+
+          if (sunny.includes(result.data.current.condition.code)) {
+            setImg("sunny")
+          }
+          if (partlyCloud.includes(result.data.current.condition.code)) {
+            setImg("partlyCloud")
+          }
+          if (cloud.includes(result.data.current.condition.code)) {
+            setImg("cloud")
+          }
+          if (rain.includes(result.data.current.condition.code)) {
+            setImg("rain")
+          }
+          if (snow.includes(result.data.current.condition.code)) {
+            setImg("snow")
+          }
+          if (fog.includes(result.data.current.condition.code)) {
+            setImg("fog")
+          }
+          if (thunder.includes(result.data.current.condition.code)) {
+            setImg("thunder")
+          }
+          if (heavySnow.includes(result.data.current.condition.code)) {
+            setImg("heavySnow")
+          }
+          if (heavySleet.includes(result.data.current.condition.code)) {
+            setImg("heavySleet")
+          }
+          const value = result?.data?.location?.name + "," + result?.data?.location?.country
+          getPhotos(value, 1, 1);
+
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  }, [position])
+
 
   const fetchData = () => {
-
     if (searchValue) {
       const response = axios.get(`https://api.weatherapi.com/v1/forecast.json?key=8eb31ccd94344ddaa6675422241009&q=${searchValue}&days=7&aqi=no&alerts=no`)
         .then(result => {
@@ -96,56 +143,58 @@ function App() {
           console.log(error)
         })
     } else {
-      const response = axios.get(`https://api.weatherapi.com/v1/forecast.json?key=8eb31ccd94344ddaa6675422241009&q=${latitude},${longitude}&days=7&aqi=no&alerts=no`)
-        .then(result => {
-          console.log("data fetched")
-          setData(result.data)
-          setCurrentData(result.data.current)
-          setForecastData(result.data.forecast)
+      if (!searchValue) {
+        const response = axios.get(`https://api.weatherapi.com/v1/forecast.json?key=8eb31ccd94344ddaa6675422241009&q=${position?.latitude},${position?.longitude}&days=7&aqi=no&alerts=no`)
+          .then(result => {
+            console.log("data fetched")
+            setData(result.data)
+            setCurrentData(result.data.current)
+            setForecastData(result.data.forecast)
 
-          console.log(result.data)
+            console.log(result.data)
 
-          if (sunny.includes(result.data.current.condition.code)) {
-            setImg("sunny")
-          }
-          if (partlyCloud.includes(result.data.current.condition.code)) {
-            setImg("partlyCloud")
-          }
-          if (cloud.includes(result.data.current.condition.code)) {
-            setImg("cloud")
-          }
-          if (rain.includes(result.data.current.condition.code)) {
-            setImg("rain")
-          }
-          if (snow.includes(result.data.current.condition.code)) {
-            setImg("snow")
-          }
-          if (fog.includes(result.data.current.condition.code)) {
-            setImg("fog")
-          }
-          if (thunder.includes(result.data.current.condition.code)) {
-            setImg("thunder")
-          }
-          if (heavySnow.includes(result.data.current.condition.code)) {
-            setImg("heavySnow")
-          }
-          if (heavySleet.includes(result.data.current.condition.code)) {
-            setImg("heavySleet")
-          }
-          const value = result?.data?.location?.name + "," + result?.data?.location?.country
-          getPhotos(value, 1, 1);
+            if (sunny.includes(result.data.current.condition.code)) {
+              setImg("sunny")
+            }
+            if (partlyCloud.includes(result.data.current.condition.code)) {
+              setImg("partlyCloud")
+            }
+            if (cloud.includes(result.data.current.condition.code)) {
+              setImg("cloud")
+            }
+            if (rain.includes(result.data.current.condition.code)) {
+              setImg("rain")
+            }
+            if (snow.includes(result.data.current.condition.code)) {
+              setImg("snow")
+            }
+            if (fog.includes(result.data.current.condition.code)) {
+              setImg("fog")
+            }
+            if (thunder.includes(result.data.current.condition.code)) {
+              setImg("thunder")
+            }
+            if (heavySnow.includes(result.data.current.condition.code)) {
+              setImg("heavySnow")
+            }
+            if (heavySleet.includes(result.data.current.condition.code)) {
+              setImg("heavySleet")
+            }
+            const value = result?.data?.location?.name + "," + result?.data?.location?.country
+            getPhotos(value, 1, 1);
 
-        })
-        .catch(error => {
-          console.log(error)
-        })
+          })
+          .catch(error => {
+            console.log(error)
+          })
+
+      } else {
+        console.log("data not found")
+      }
     }
   }
 
-  console.log(data)
-
   useEffect(() => {
-
     fetchData()
   }, [])
 
@@ -171,9 +220,9 @@ function App() {
   return (
 
     <WeatherData.Provider value={{ data, setData, currentData, setCurrentData, forecastData, setForecastData }}>
-      <CelciusUnit.Provider value={{ celcius, setCelcius }} >
+      <CelciusUnit.Provider value={{ celcius, setCelcius,sidebar,setSidebar }} >
         <div className="App">
-          <div className='right-main'>
+          <div className='right-main' style={{display:`${sidebar}`}}>
             <Sidebar cityImg={cityImg} setSearchValue={setSearchValue} searchValue={searchValue} fetchData={fetchData} img={img} setCityImg={setCityImg} />
           </div>
           <div className='left-main' >

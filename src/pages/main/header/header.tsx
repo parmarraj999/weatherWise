@@ -11,7 +11,7 @@ interface Props {
 const Header: React.FC<Props> = (props) => {
 
     const { mainNavigation } = props;
-    const { celcius, setCelcius } = useContext(CelciusUnit)
+    const { celcius, setCelcius, setSidebar } = useContext(CelciusUnit)
 
     const tl = gsap.timeline();
 
@@ -46,6 +46,10 @@ const Header: React.FC<Props> = (props) => {
         }, 600);
     }
 
+    const closeSideBar = () => {
+        setSidebar("flex")
+    }
+
     return (
         <div className='main-header' >
             <div style={{ display: 'flex', gap: '1.5rem' }}>
@@ -53,6 +57,9 @@ const Header: React.FC<Props> = (props) => {
                 <h2>Week</h2>
             </div>
             <div style={{ display: 'flex', gap: '1rem' }} >
+            <div className='close-sidebar close-btn' style={{ marginLeft: '10px' }} onClick={closeSideBar}>
+                    <svg style={{ width: '25px' }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 5V19H19V5H12ZM4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3Z"></path></svg>
+                </div>
                 <div style={celcius === "celcius" ? { background: "black", color: 'white' } : {}} className='degree-btn' onClick={changeCelcius}>°C
                     <div className='circle-anime-c' ></div>
                 </div>
