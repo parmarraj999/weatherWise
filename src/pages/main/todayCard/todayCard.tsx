@@ -1,8 +1,19 @@
 import React, { useContext } from 'react'
 import './todayCard.css'
 import { WeatherData } from '../../../context/context'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 
 function TodayCard() {
+
+    useGSAP(()=>{
+        gsap.from(".todayCard",{
+            opacity:0,
+            duration:.3,
+            stagger:.3, 
+            delay:.5
+        })
+    })
 
     const { currentData, forecastData } = useContext(WeatherData)
 

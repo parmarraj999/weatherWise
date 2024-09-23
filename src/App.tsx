@@ -5,14 +5,16 @@ import Main from './pages/main/main';
 import axios from 'axios';
 import { CelciusUnit, WeatherData } from './context/context';
 import { useGeolocated } from "react-geolocated";
+import Loader from './component/loader/loader';
 
 function App() {
 
   const [searchValue, setSearchValue] = useState<string>('');
 
-  const [sidebar,setSidebar] = useState<string>("flex")
+  const [sidebar, setSidebar] = useState<string>("flex")
 
   const [data, setData] = useState<any>([])
+  const [showLoader, setShowLoader] = useState<string>('h')
   const [currentData, setCurrentData] = useState<any>([]);
   const [forecastData, setForecastData] = useState<any>([]);
 
@@ -56,6 +58,7 @@ function App() {
           setData(result.data)
           setCurrentData(result.data.current)
           setForecastData(result.data.forecast)
+          setShowLoader("hide")
 
           console.log(result.data)
 
@@ -105,6 +108,7 @@ function App() {
           setData(result.data)
           setCurrentData(result.data.current)
           setForecastData(result.data.forecast)
+          setShowLoader('hide')
 
           console.log(result.data)
 
@@ -219,18 +223,25 @@ function App() {
 
   return (
 
-    <WeatherData.Provider value={{ data, setData, currentData, setCurrentData, forecastData, setForecastData }}>
-      <CelciusUnit.Provider value={{ celcius, setCelcius,sidebar,setSidebar }} >
-        <div className="App">
-          <div className='right-main' style={{display:`${sidebar}`}}>
-            <Sidebar cityImg={cityImg} setSearchValue={setSearchValue} searchValue={searchValue} fetchData={fetchData} img={img} setCityImg={setCityImg} />
-          </div>
-          <div className='left-main' >
-            <Main />
-          </div>
-        </div>
-      </CelciusUnit.Provider>
-    </WeatherData.Provider>
+    <>
+      {
+        showLoader === "show" ?
+          <Loader/> :  
+      <WeatherData.Provider value={{ data, setData, currentData, setCurrentData, forecastData, setForecastData }}>
+            <CelciusUnit.Provider value={{ celcius, setCelcius, sidebar, setSidebar }} >
+              <div className="App">
+                <div className='right-main' style={{ display: `${sidebar}` }}>
+                  <Sidebar cityImg={cityImg} setSearchValue={setSearchValue} searchValue={searchValue} fetchData={fetchData} img={img} setCityImg={setCityImg} />
+                </div>
+                <div className='left-main' >
+                  <Main />
+                </div>
+              </div>
+            </CelciusUnit.Provider>
+          </WeatherData.Provider>
+
+}
+    </>
   );
 }
 

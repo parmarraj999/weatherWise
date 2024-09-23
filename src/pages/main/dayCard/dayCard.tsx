@@ -1,8 +1,14 @@
 import React, { useContext } from 'react'
 import './dayCard.css'
 import { CelciusUnit, WeatherData } from '../../../context/context'
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 function DayCard() {
+
+    useGSAP(()=>{
+        
+    })
 
     const { forecastData } = useContext(WeatherData)
     const data = forecastData.forecastday;
@@ -69,6 +75,10 @@ function DayCard() {
     }
 
     // main tsx code 
+
+    // animation section 
+
+   
 
     return (
         <div className='daycard-container' >
